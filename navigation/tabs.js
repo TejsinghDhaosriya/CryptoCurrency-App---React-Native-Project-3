@@ -2,37 +2,37 @@ import React from "react";
 import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
 import {
   createBottomTabNavigator,
-  BottomTabBar,
 } from "@react-navigation/bottom-tabs";
 import { LinearGradient } from "react-native-linear-gradient";
 import { Home } from "../screens";
 import { COLORS, FONTS, icons } from "../constants";
 
 const Tab = createBottomTabNavigator();
-const TabBarCustomButton=({childreen,onPress})=>{
-    return(
-        <TouchableOpacity
+const TabBarCustomButton = ({ children, onPress }) => {
+  return (
+    <TouchableOpacity
+      style={{
+        top: -30,
+        justifyContent: "center",
+        alignItems: "center",
+        ...styles.shadow,
+      }}
+      onPress={onPress}
+    >
+      {/* <LinearGradient
+        colors={[COLORS.primary, COLORS.secondary]}
         style={{
-            top:-30,
-            justifyContent:'center',
-            alignItems:'center',
-            ...styles.shadow
+          width: 70,
+          height: 70,
+          borderRadius: 35,
         }}
-        onPress={onPress}
-        >
-            <LinearGradient
-  colors={[COLORS.primary,COLORS.secondary]}
-style={{
-                width:70,
-                height:70,
-                borderRadius:35
-            }}
-            />
-            {children}
-            </TouchableOpacity>
-            
-    )
-}
+      >
+        {children}
+      </LinearGradient> */}
+      <Text>Main</Text>
+    </TouchableOpacity>
+  );
+};
 
 const Tabs = () => {
   return (
@@ -105,26 +105,24 @@ const Tabs = () => {
           ),
         }}
       />
-      <Tab.Screen name="Transaction" component={Home} 
-      options={{
-          tabBarIcon:({focused})=>(
-              <Image
-               source={icons.transaction}
-               resizeMode="contain"
-               style={{width:30,height:39,tintColor:COLORS.white}}
-           />
-               ),
-               tabBarBotton:(props)=>{
-                   <TabBarCustomButton
-                   {...props}
-                   />
-               }
-      }}
+      <Tab.Screen
+        name="Transaction"
+        component={Home}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={icons.transaction}
+              resizeMode="contain"
+              style={{ width: 30, height: 30, tintColor: COLORS.white }}
+            />
+          ),
+          tabBarButton: (props) => <TabBarCustomButton {...props} />,
+        }}
       />
       <Tab.Screen
         name="Prices"
         component={Home}
-        Options={{
+        options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center" }}>
               <Image
@@ -151,7 +149,7 @@ const Tabs = () => {
       <Tab.Screen
         name="Settings"
         component={Home}
-        ptions={{
+        options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center" }}>
               <Image
